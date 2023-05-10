@@ -1,0 +1,66 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button text="Back" icon="caret-back" defaultHref="/stocks"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Kategoriler Sayfası</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+    <ion-list>
+      
+        <ion-card *ngFor="let kategori of kategoriler">
+            
+          <ion-card-header>
+            <ion-card-title class="ion-text-center"><h2>{{kategori.katAdi}}</h2></ion-card-title>
+          </ion-card-header>
+
+          <img src="{{kategori.katResim}}" alt="" style="height: 300px; width: 600px;">
+          
+          <ion-button (click)="Sil(kategori)" expand="block" fill="clear" shape="round" color="danger">
+            Kategoriyi Sil
+          </ion-button>
+        </ion-card>
+        
+    </ion-list>
+
+
+
+
+
+  </ion-content>
+
+  <!-- Kategori Ekle -->
+  <ion-button expand="block" (click)="setOpen(true)" >Kategori Ekle</ion-button>
+  <ion-modal [isOpen]="isModalOpen">
+  <ng-template >
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Kategori Ekle</ion-title>
+        <ion-buttons slot="end">
+          <ion-button (click)="setOpen(false)">Kapat</ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="ion-padding">
+      <form [formGroup]="KatEkle" (ngSubmit)="Console()">
+        <ion-item>
+          <ion-label position="floating">Kategori İsmi : <ion-text color="danger">*</ion-text></ion-label>
+          <ion-input required formControlName="katAdi" type="text"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Kategori Logo : <ion-text color="danger">*</ion-text></ion-label>
+          <ion-input required formControlName="katResim" type="text"></ion-input>
+        </ion-item>
+        <!-- <input type="hidden"  formControlName="itemKayitTarih"  />
+        <input type="hidden"  formControlName="itemDuzenlenmeTarih" /> -->
+        <ion-button (click)="KategoriEkle()" expand="block" fill="clear" shape="round"  [disabled]="!KatEkle.valid">
+          Kaydet
+        </ion-button>
+       </form>
+        
+    </ion-content>
+  </ng-template>
+

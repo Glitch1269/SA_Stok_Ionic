@@ -1,0 +1,101 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button  text="Back" icon="caret-back" defaultHref="/stocks"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Stock Details</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  
+
+  
+  <ion-card  >
+    
+      <img src="{{selectedItem?.itemResim}}" alt="" style="height: 650px; height: 350px;" >
+
+    <ion-card-header>
+      <ion-card-title><h2>Ürün Adı : {{selectedItem?.itemAdi}}</h2></ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+
+      <ion-item>
+        <ion-label>Ürün Id : {{selectedItem?.itemId}}</ion-label>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Ürün Kategori : {{selectedItem?.itemKatTur}}</ion-label>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Ürün Kalan Miktarı : {{selectedItem?.itemMiktar}} </ion-label>
+
+        <ion-button (click)="Azalt(selectedItem)" expand="block" fill="clear" shape="round" color="Danger">
+          Azalt
+        </ion-button>
+
+        <ion-button (click)="MiktarKaydet(selectedItem)" expand="block" fill="clear" shape="round" color="danger">
+          Kaydet
+        </ion-button>
+
+        <ion-button (click)="Arttir(selectedItem)" expand="block" fill="clear" shape="round" color="success">
+          Arttır
+        </ion-button>
+
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Ürün Kayıt Tarihi : {{selectedItem?.itemKayitTarih | date : "dd.MM.yy HH:mm"}}</ion-label>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Ürün Düzenlenme Tarihi : {{selectedItem?.itemDuzenlenmeTarih | date : "dd.MM.yy HH:mm"}}</ion-label>
+      </ion-item>    
+
+    </ion-card-content>
+    
+  </ion-card>
+  
+
+  
+<ion-button expand="block" (click)="setOpen(true)" >Item Duzenle</ion-button>
+<ion-modal [isOpen]="isModalOpen"  #addItemModal >
+<ng-template >
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Düzenle</ion-title>
+      <ion-buttons slot="end">
+        <ion-button (click)="setOpen(false)">Kapat</ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content class="ion-padding">
+    <form [formGroup]="itemEkle" (ngSubmit)="Duzenle(selectedItem,true)">
+      <ion-item>
+        <ion-label>Item Ekle : <ion-text color="danger" >*</ion-text></ion-label
+        >
+        <ion-input required formControlName="itemAdi" type="text" placeholder="{{selectedItem?.itemAdi}}"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Item Kat : <ion-text color="danger">*</ion-text></ion-label
+        >
+        <ion-input required formControlName="itemKatTur" type="text" placeholder="{{selectedItem?.itemKatTur}}"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Item Miktar : : <ion-text color="danger">*</ion-text></ion-label>
+        <ion-input required  formControlName="itemMiktar"type="text" placeholder="{{selectedItem?.itemMiktar}}"></ion-input>
+      </ion-item>
+
+      <ion-button (click)="Duzenle(selectedItem,true)" expand="" fill="clear" shape="round" color="warning">
+        Item Düzenle
+      </ion-button>
+    </form>
+  </ion-content> 
+ </ng-template>
+</ion-modal> 
+
+</ion-content>
+
+  
+

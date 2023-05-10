@@ -1,0 +1,89 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Items
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content >
+  <ion-button  expand="block" fill="clear" shape="round">
+    Item Ekle
+  </ion-button>
+<ion-card *ngFor=" let item of items">
+  <ion-card-header>
+    <ion-card-title>{{item.itemAdi}}</ion-card-title>
+    <ion-card-content>
+      <ion-item>
+        <ion-label>Adı : {{item.itemAdi}}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>Kategori : {{item.itemKatTur}}</ion-label>
+      </ion-item>
+       <ion-item>
+        <ion-label>Stok Durumu : {{item.itemMiktar}}</ion-label>
+      </ion-item>
+    </ion-card-content>
+  </ion-card-header>
+</ion-card>
+</ion-content>
+
+
+
+
+<ion-button expand="block" (click)="setOpen(true)">Item Ekle</ion-button>
+<ion-modal [isOpen]="isModalOpen">
+<ng-template>
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Modal</ion-title>
+      <ion-buttons slot="end">
+        <ion-button (click)="setOpen(false)">Kapat</ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content class="ion-padding">
+    <form [formGroup]="itemEkle" (ngSubmit)="Console()">
+      <ion-item>
+        <ion-label position="floating"
+          >Item Ekle : <ion-text color="danger">*</ion-text></ion-label
+        >
+        <ion-input required formControlName="itemAdi" type="text"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating"
+          >Açıklama : <ion-text color="danger">*</ion-text>
+        </ion-label>
+        <ion-input required formControlName="itemMiktar"type="text"></ion-input>
+      </ion-item>
+      <ion-button (click)="Kaydet()" expand="block" fill="clear" shape="round">
+        Kaydet
+      </ion-button>
+    </form>
+  </ion-content> 
+ </ng-template>
+</ion-modal> 
+
+
+
+
+
+
+<ion-tab-bar slot="bottom">
+  <ion-tab-button routerLink="../home">
+    <ion-icon name="home"></ion-icon>
+    <ion-label>Home</ion-label>
+  </ion-tab-button>
+  
+  <ion-tab-button routerLink="../kategori">
+    <ion-icon name="home"></ion-icon>
+    <ion-label>Login</ion-label>
+  </ion-tab-button>
+  
+  
+  <ion-tab-button routerLink="../stocks">
+    <ion-icon name="home"></ion-icon>
+    <ion-label>Stocks</ion-label>
+  </ion-tab-button>
+
+ 
